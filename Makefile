@@ -18,6 +18,7 @@ build-dev-env:  ## Build dev instance on your local machine
 run-dev-env:  ## Run DEV instance
 	@docker-compose \
 		--file docker-compose.yml run \
+		--publish 8000:8000 \
 		--rm \
 		--detach \
 		app
