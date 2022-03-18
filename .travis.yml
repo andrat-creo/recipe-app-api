@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.8"
+
+services:
+  - docker
+
+before_install:
+  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
+before_script: pip install docker-compose
+
+script:
+  - docker-compose run --user root app sh -c "python manage.py wait_for_db && coverage run --source='.' manage.py test && coverage report"
